@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/stylesheets/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="header_message">
+      <h2 class="header_logo">ATN Shop</h2>
+      <p class="header_welcome">Welcome ...</p>
+      <h2 class="header_logout">Logout</h2>
+    </div>
+    <div>
+      <h2>Add a product</h2>
+    </div>
+    <div class="form_login">
+      <div class="row">
+        <table border="1" cellpadding="2" cellspacing="2">
+          <tr>
+            <th>Id</th>
+            <th>Product name</th>
+            <th>Quantity:</th>
+            <th>Price:</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+          <%- products %>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
