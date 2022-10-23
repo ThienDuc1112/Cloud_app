@@ -30,7 +30,7 @@ async function showProduct(id_shop) {
         <td><input type="text" name="name"> </td>       
         <td> <input type="text" name="price"></td>       
         <td> <input type="text" name="quantity"></td> 
-       <td><input type="submit" value="add" name="button"></td>
+       <td><input type="submit" value="Add" name="button"></td>
         <form>
     `
     return productString;

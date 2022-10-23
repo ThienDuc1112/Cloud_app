@@ -10,17 +10,6 @@ var deleteItem = require('../Model/deleteProduct');
 var updateItem = require('../Model/updateProduct');
 var addItem = require('../Model/addProduct');
 
-router.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    secure: true,
-    maxAge: 60000
-  }
-}));
-// var sessionData = req.session;
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
@@ -34,9 +23,6 @@ router.post('/login', async function (req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
   let [authenticated, idshop, role] = await authen(username, password);
-  sessionData.shop = idshop;
-  sessionData.save();
-  console.log(sessionData.shop);
   if (authenticated == true && role == 'shop') {
     let productString = await tableProduct(idshop);
     res.render('home', { products: productString });
