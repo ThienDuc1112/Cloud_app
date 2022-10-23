@@ -23,6 +23,16 @@ async function showProduct(id_shop) {
           </tr>     
       `
     });
+    productString += `
+    <tr>
+        <form method="POST" action="/addProduct">
+        <td><input type="text" name="id"></td>        
+        <td><input type="text" name="name"> </td>       
+        <td> <input type="text" name="price"></td>       
+        <td> <input type="text" name="quantity"></td> 
+       <td><input type="submit" value="add" name="button"></td>
+        <form>
+    `
     return productString;
 }
 module.exports = showProduct;
