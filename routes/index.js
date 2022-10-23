@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var session = require('express-session');
 var authen = require('../Model/authenticate');
 var tableProduct = require('../Model/ShowProduct');
 var selectBoxShop = require('../Model/showSelectBoxShop');
@@ -7,6 +8,16 @@ var getTableSelectProduct = require('../Model/getSelectedProduct');
 var detailProduct = require('../Model/viewDetailProduct');
 var deleteItem = require('../Model/deleteProduct');
 var updateItem = require('../Model/updateProduct');
+var addItem = require('../Model/addProduct');
+
+router.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true,
+  maxAge: 60000 }
+}));
+var sessionData = req.session;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -21,7 +32,9 @@ router.post('/login', async function(req, res, next){
   var username = req.body.username;
   var password = req.body.password;
   let [authenticated, idshop, role] = await authen(username,password);
-
+      sessionData.shop = idshop;
+      sessionData.save();
+      console.log(sessionData.shop);
   if(authenticated==true&&role=='shop'){
     let productString = await tableProduct(idshop);
     res.render('home',{products: productString});
@@ -63,9 +76,9 @@ router.post('/button', async function(req, res, next){
     res.render('updateProduct',{product_detail:detail_product_string});
   } else{
     var shop = req.body.shop;
-    let productString = await tableProduct(shop);
     var id_product = req.body.id;
      deleteItem(id_product);
+     let productString = await tableProduct(shop);
     res.render('home',{products: productString});
   }
   
@@ -77,8 +90,21 @@ router.post('/update', async function(req, res, next){
   let quantityProduct = req.body.quantity;
   let priceProduct = req.body.price;
   let shop = req.body.shop;
-  let productString = await tableProduct(shop);
+ 
   await updateItem(idProduct,nameProduct,quantityProduct,priceProduct);
+  let productString = await tableProduct(shop);
   res.render('home',{products: productString});
+});
+
+router.post('/addProduct', async function(req, res, next){
+  let id = req.body.id;
+  let name = req.body.name;
+  let quantity = req.body.quantity;
+  let price = req.body.price;
+  var idShop = req.session.shop;
+  console.log(idShop);
+//  addItem(id,name,quantity,price,idShop);
+ let productString = await tableProduct(idShop);
+ res.render('home',{products: productString});
 });
 module.exports = router;
