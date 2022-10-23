@@ -5,11 +5,109 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ATN shop</title>
+    <style>
+      *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Open Sans', sans-serif;
+      }
+      body{
+        background-image: url("https://lh3.googleusercontent.com/ZokGCSsn0836X4Dt0SBNQYzavqQcGL-WDeMBNOSGqe5MGK9dp_JATWJTyWk4eRIFW4xhVovtugcq0Ynssvejel3Nc_v7T8c61UWz2LAL9SbHaJ8kTs5KRc_pAvmuJut1eMNQmw-e");
+        background-size: cover;
+      }
+      .form_login{
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    flex-wrap: wrap;
+    align-content: center;
+    flex-direction: column;
+      }
+      .flip-animation {
+  display: flex;
+  justify-content: center;
+  transform: translate3d(0,0,0);
+}
+
+.flip-animation > span {
+  font-size: 3rem;
+  color: #fff;
+  animation: flipping 2s infinite;
+}
+
+.flip-animation > span:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.flip-animation > span:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.flip-animation > span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.flip-animation > span:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+.flip-animation > span:nth-child(5) {
+  animation-delay: 1s;
+}
+
+.flip-animation > span:nth-child(6) {
+  animation-delay: 1.2s;
+}
+
+@keyframes flipping {
+  0%, 80% {
+    transform: rotateY(360deg);
+  }
+}
+
+button[type="submit"] {
+  background: rgba(255, 255, 255, 0.2);
+  border: 0;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+button[type="submit"]:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+    </style>
   </head>
 
   <body>
-    <p1> Welcome to ATM system</p1>
     <div class="form_login">
+      <div class="flip-animation">
+        <span>W</span>
+        <span>E</span>
+        <span>L</span>
+        <span>C</span>
+        <span>O</span>
+        <span>M</span>
+        <span>E</span>
+        <span>&nbsp;</span>
+        <span>T</span>
+        <span>O</span>
+        <span>&nbsp;</span>
+        <span>A</span>
+        <span>T</span>
+        <span>N</span>
+        <span>&nbsp;</span>
+        <span>S</span>
+        <span>H</span>
+        <span>O</span>
+        <span>P</span>
+      </div>
       <form method="POST" action="">
         <button type="submit" class="submitBtn" value ="login">Login here</button>
       </form>

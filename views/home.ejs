@@ -6,6 +6,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../public/stylesheets/style.css" />
     <title>Document</title>
+    <style>
+      *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+  #header_message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 6vh;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0 1rem;
+}
+.header_logo {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0 1rem;
+}
+.header_welcome {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.header_logout {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0 1rem;
+  cursor: pointer;
+}
+.header_logout:hover {
+  color: green;
+}
+
+ body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.42em;
+  color:#A7A1AE;
+  background-image: url("https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2020/02/Usign-Gradients-Featured-Image.jpg");
+  background-size: cover;
+}
+
+h1 {
+  font-size:3em; 
+  font-weight: 300;
+  line-height:1em;
+  text-align: center;
+  color: #4DC3FA;
+}
+
+h2 {
+  font-size:1em; 
+  font-weight: 300;
+  text-align: center;
+  display: block;
+  line-height:1em;
+  padding-bottom: 2em;
+  color: #FB667A;
+}
+
+h2 a {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FB667A;
+  text-decoration: none;
+}
+
+.blue { color: #185875; }
+.yellow { color: #FFF842; }
+
+.container th h1 {
+	  font-weight: bold;
+	  font-size: 1em;
+  text-align: center;
+  color: #fff;
+}
+
+.container td {
+	  font-weight: normal;
+	  font-size: 1em;
+	  box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.container {
+	  text-align: left;
+	  overflow: hidden;
+	  width: 80%;
+	  margin: 0 auto;
+  display: table;
+  padding: 0 0 8em 0;
+}
+
+.container td, .container th {
+	 padding: 2% 2% 2% 2%;
+}
+
+.container tr:nth-child(odd) {
+	  background-color: #323C50;
+}
+
+.container tr:nth-child(even) {
+	  background-color: #2C3446;
+}
+
+.container th {
+	  background-color: #1F2739;
+}
+
+.container td:first-child { color: #FB667A; }
+
+.container tr:hover {
+	        box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.container td:hover {
+  background-color: #FFF842;
+  color: #403E10;
+  font-weight: bold;
+  box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+  transition-delay: 0s;
+	  transition-duration: 0.4s;
+	  transition-property: all;
+  transition-timing-function: line;
+}
+button[type="submit"]{
+  background-color: transparent;
+    border: none;
+    font-size: 15px;
+    color: #fff;
+}
+button[type="submit"]:hover{
+  cursor: pointer;
+}
+</style>
   </head>
   <body>
     <div id="header_message">
@@ -18,15 +162,15 @@
     </div>
     <div class="form_login">
       <div class="row">
-        <table border="1" cellpadding="2" cellspacing="2">
-          <tr>
-            <th>Id</th>
-            <th>Product name</th>
-            <th>Quantity:</th>
-            <th>Price:</th>
-            <th>Update</th>
-            <th>Delete</th>
-          </tr>
+        <table class="container">
+          <thead>
+            <th class=""><h1>Id</h1></th>
+            <th class=""><h1>Product name</h1></th>
+            <th class=""><h1>Quantity</h1></th>
+            <th class=""><h1>Price</h1></th>
+            <th class=""><h1>Update</h1></th>
+            <th class=""><h1>Delete</h1></th>
+          </thead>
           <%- products %>
         </table>
       </div>
