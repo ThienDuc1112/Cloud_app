@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var session = require('express-session');
 var authen = require('../Model/authenticate');
 var tableProduct = require('../Model/ShowProduct');
 var selectBoxShop = require('../Model/showSelectBoxShop');
@@ -9,15 +8,7 @@ var detailProduct = require('../Model/viewDetailProduct');
 var deleteItem = require('../Model/deleteProduct');
 var updateItem = require('../Model/updateProduct');
 var addItem = require('../Model/addProduct');
-
-router.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false,
-    httpOnly:true,
-  maxAge: 60000 }
-}));
+let sessionData;;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -25,27 +16,29 @@ router.get('/', function(req, res, next) {
 });
 /* GET login page. */
 router.post('', function (req, res) {
-  res.render('login');
+  res.render('login',{notice: 'welcome'});
+});
+router.get('/logout',(req,res) => {
+  req.session.destroy();
+  res.redirect('/');
 });
 /* route to user or admin page. */
 router.post('/login', async function(req, res, next){
   var username = req.body.username;
   var password = req.body.password;
-  var sessionData = req.session;
+   sessionData = req.session;
   let [authenticated, idshop, role] = await authen(username,password);
-      sessionData.user ={
-        username: username,
-        password: password,
-        idshop: idshop,
-      }
-      console.log(sessionData.shop);
   if(authenticated==true&&role=='shop'){
-    let productString = await tableProduct(idshop);
-    res.render('home',{products: productString});
+    sessionData.user ={
+      username: username,
+      shop: idshop,
+    };
+    res.redirect('/users');
   } else if(authenticated==true&&role=='admin'){
-    let listSelectShop = await selectBoxShop();
-    let tableProduct = await getTableSelectProduct('all');
-    res.render('admin',{selectBox: listSelectShop,result: tableProduct})
+    sessionData.user ={
+      username: username,
+      shop: idshop,};
+    res.redirect('/admin');
   } else{
     res.render('login', {notice: "wrong username or password"});
 } 
@@ -79,11 +72,9 @@ router.post('/button', async function(req, res, next){
     `;
     res.render('updateProduct',{product_detail:detail_product_string});
   } else{
-    var shop = req.body.shop;
     var id_product = req.body.id;
      deleteItem(id_product);
-     let productString = await tableProduct(shop);
-    res.render('home',{products: productString});
+    res.redirect('/users');
   }
   
 });
@@ -93,22 +84,17 @@ router.post('/update', async function(req, res, next){
   let nameProduct = req.body.name;
   let quantityProduct = req.body.quantity;
   let priceProduct = req.body.price;
-  let shop = req.body.shop;
- 
   await updateItem(idProduct,nameProduct,quantityProduct,priceProduct);
-  let productString = await tableProduct(shop);
-  res.render('home',{products: productString});
+  res.redirect('/users');
 });
 
 router.post('/addProduct', async function(req, res, next){
-  let id = req.body.id;
   let name = req.body.name;
   let quantity = req.body.quantity;
   let price = req.body.price;
-  var idShop = req.session.user.idshop;
-  console.log(req.session.user.idshop);
- addItem(id,name,quantity,price,idShop);
- let productString = await tableProduct(idShop);
- res.render('home',{products: productString});
+  let idShop = req.session.user.shop;
+  console.log(req.session.user.shop);
+ addItem(name,price,quantity,idShop);
+res.redirect('/users');
 });
 module.exports = router;

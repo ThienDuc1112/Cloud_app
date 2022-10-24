@@ -1,7 +1,7 @@
 var pg_conn = require('./database');
 async function showProduct(id_shop) {
     const shop_query = {
-        text: 'SELECT * FROM product WHERE shop =$1',
+        text: 'SELECT * FROM product WHERE shop =$1 order by id asc',
         values: [id_shop]
     }
     var query_data = await pg_conn.query(shop_query);
@@ -26,12 +26,13 @@ async function showProduct(id_shop) {
     productString += `
     <tr>
         <form method="POST" action="/addProduct">
-        <td><input type="text" name="id"></td>        
+        <td><input type="text" readonly name="id"></td>        
         <td><input type="text" name="name"> </td>       
         <td> <input type="text" name="price"></td>       
         <td> <input type="text" name="quantity"></td> 
        <td><input type="submit" value="Add" name="button"></td>
         <form>
+        </tr>
     `
     return productString;
 }

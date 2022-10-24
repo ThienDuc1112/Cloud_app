@@ -5,8 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Hello admin </title>
+    <script type = "text/JavaScript">
+           function AutoRefresh( t ) {
+              setTimeout("location.reload(true);", t);
+           }
+     </script>
 </head>
-<body>
+<body onload = "JavaScript:AutoRefresh(10000);">
    <h2>admin page</h2>
     <div class="selectBox">
             <%- selectBox %>
@@ -14,6 +19,5 @@
      </div>
      <h1>The list of product</h1>
      <div> <%- result %> </div>
-     <
 </body>
 </html>
