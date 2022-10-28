@@ -8,7 +8,7 @@ var detailProduct = require('../Model/viewDetailProduct');
 var deleteItem = require('../Model/deleteProduct');
 var updateItem = require('../Model/updateProduct');
 var addItem = require('../Model/addProduct');
-let sessionData;;
+let session;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -26,7 +26,7 @@ router.get('/logout',(req,res) => {
 router.post('/login', async function(req, res, next){
   var username = req.body.username;
   var password = req.body.password;
-   sessionData = req.session;
+   let sessionData = req.session;
   let [authenticated, idshop, role] = await authen(username,password);
   if(authenticated==true&&role=='shop'){
     sessionData.user ={
